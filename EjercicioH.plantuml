@@ -1,0 +1,25 @@
+@startuml EjercicioH
+
+class Registro {
+  - catalogo: CatalogoProductos
+  - venta: Venta
+
+  + Registro(CatalogoProductos cp)
+  + finalizarVenta()
+  + crearNuevaVenta()
+  + introducirArticulo(ArticuloID id, int cant)
+}
+
+class Venta {
+  - fechaHora: Date
+  - lineasVenta: List
+
+  + Venta()
+  + crearLineaVenta(EspecificacionProducto espec, int cant)
+}
+
+Registro --> CatalogoProductos: getEspecificacion(Articuloid id)
+CatalogoProductos --> Registro: EspecificacionProducto espec
+Registro --> Venta: crearLineaVenta(EspecificacionProducto espec, int cant)
+
+@enduml

@@ -1,0 +1,37 @@
+@startuml EjercicioL
+
+[*] --> EncargarProducto
+
+state EncargarProducto {
+    [*] --> Encargar
+    Encargar --> Pagar
+    Pagar --> [*]
+}
+
+EncargarProducto --> ValidarPedido : Pedido colocado
+
+state ValidarPedido {
+    [*] --> Validar
+    Validar --> CobrarPago : Pedido validado
+    CobrarPago --> [*]
+}
+
+ValidarPedido --> ObtenerProducto : Pedido pagado por adelantado
+
+state ObtenerProducto {
+    [*] --> Obtener
+    Obtener --> EnviarUrgente : ¿Es urgente?
+    Obtener --> EnviarOrdinario : No es urgente
+    EnviarUrgente --> PedidoRealizado
+    EnviarOrdinario --> PedidoRealizado
+}
+
+state PedidoRealizado {
+    [*] --> DarCerveza
+    DarCerveza --> AñadirLista : Pedido realizado
+    DarCerveza --> EnviarRecibo : Pedido realizado
+    AñadirLista --> [*]
+    EnviarRecibo --> [*]
+}
+
+@enduml
